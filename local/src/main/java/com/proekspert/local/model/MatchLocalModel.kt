@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "matches")
-data class MatchesLocalModel(
+data class MatchLocalModel(
     @PrimaryKey
     val team1 :String,
     @PrimaryKey
