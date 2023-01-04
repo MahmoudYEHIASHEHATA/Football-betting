@@ -1,4 +1,4 @@
-package com.proekspert.repository
+package com.proekspert.domain.repository
 
 import com.proekspert.common.Resource
 import com.proekspert.domain.entity.MatchEntity
