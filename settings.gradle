@@ -16,3 +16,4 @@ rootProject.name = "Football betting"
 include ':app'
 include ':common'
 include ':domain'
+include ':data'
