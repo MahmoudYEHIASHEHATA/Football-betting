@@ -5,6 +5,7 @@ ext {
     appcompat = '1.5.1'
     coroutines = "1.6.2"
     hilt_version = "2.44"
+    roomVersion = "2.4.3"
 
 
     // Test Dependencies
