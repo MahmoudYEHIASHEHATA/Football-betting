@@ -22,6 +22,8 @@ class RepositoryImp @Inject constructor(
             try {
                 // Get data from RemoteDataSource
                 val data = remoteDataSource.getAllMatches()
+                //Delete the old matches if exist
+                localDataSource.deleteAllMatches()
                 // Save to local or update if exist
                 localDataSource.addAllMatches(data)
                 // Emit data
@@ -46,6 +48,8 @@ class RepositoryImp @Inject constructor(
             try {
                 // Get data from RemoteDataSource
                 val data = remoteDataSource.getAllMatchesResults()
+                //Delete the old matches results if exist
+                localDataSource.deleteAllMatchesResults()
                 // Save to local or update if exist
                 localDataSource.addAllMatchesResults(data)
                 // Emit data
