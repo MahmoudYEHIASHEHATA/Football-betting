@@ -8,19 +8,13 @@ import com.proekspert.data.model.MatchResultDTO
  */
 interface LocalDataSource {
 
-    suspend fun addMatchBet(matchBet: MatchResultDTO): Long
-
     suspend fun addAllMatches(matchesList: List<MatchDTO>): List<Long>
 
-    suspend fun addAllMatchesResults(matchesResults: List<MatchResultDTO>): Long
-
-    suspend fun getMatchBet(team1: String, team2: String): MatchResultDTO
+    suspend fun addAllMatchesResults(matchesResults: List<MatchResultDTO>): List<Long>
 
     suspend fun getAllMatches(): List<MatchDTO>
 
     suspend fun getAllMatchesResults(): List<MatchResultDTO>
-
-    suspend fun deleteAllMatchesBet()
 
     suspend fun deleteAllMatches()
 

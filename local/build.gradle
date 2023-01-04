@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
@@ -33,12 +34,20 @@ android {
 }
 
 dependencies {
-    implementation project(':common')
 
+    implementation project(':common')
+    implementation project(':data')
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+
+    // Room
+    api "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    // For Kotlin use kapt instead of annotationProcessor
+    // optional - Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$roomVersion"
 
     // Test
     testImplementation "junit:junit:$junitVersion"
@@ -52,6 +61,20 @@ dependencies {
     testImplementation "androidx.test:runner:$testRunnerVersion"
     // Mock objects
     testImplementation "io.mockk:mockk:$mockkVersion"
-    // For Flow test
-    testImplementation "app.cash.turbine:turbine:$turbineVersion"
+
+    // androidTestImplementation for pure JVM unit tests
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines") {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+    // Run Blocking Test
+    androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    // Truth
+    androidTestImplementation "com.google.truth:truth:$truthVersion"
+    // For small test - large test annotations
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    // Test with Dagger Hilt
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
