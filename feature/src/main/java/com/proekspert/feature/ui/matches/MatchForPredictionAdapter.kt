@@ -11,10 +11,15 @@ import com.proekspert.feature.model.MatchUiModel
  * Adapter class for RecyclerView
  */
 class MatchForPredictionAdapter constructor(
-    private val clickFunc : ((MatchUiModel?) -> Unit)? = null
-) : BaseRecyclerAdapter<MatchUiModel, RowMatchItemLayoutBinding, MatchForPredictionViewHolder>(WeatherItemDiffUtil()) {
+    private val clickFunc: ((MatchUiModel?) -> Unit)? = null
+) : BaseRecyclerAdapter<MatchUiModel, RowMatchItemLayoutBinding, MatchForPredictionViewHolder>(
+    MatchItemDiffUtil()
+) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchForPredictionViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MatchForPredictionViewHolder {
         val binding = RowMatchItemLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -28,7 +33,7 @@ class MatchForPredictionAdapter constructor(
 
 }
 
-class WeatherItemDiffUtil : DiffUtil.ItemCallback<MatchUiModel>() {
+class MatchItemDiffUtil : DiffUtil.ItemCallback<MatchUiModel>() {
     override fun areItemsTheSame(oldItem: MatchUiModel, newItem: MatchUiModel): Boolean {
         return oldItem == newItem
     }
