@@ -8,6 +8,8 @@ ext {
     roomVersion = "2.4.3"
     retrofitVersion = "2.9.0"
     loggingInterceptorVersion = "5.0.0-alpha.2"
+    recyclerView = '1.2.1'
+    fragment_ktx = '1.5.5'
 
     // Test Dependencies
     junitVersion = "4.13.2"
