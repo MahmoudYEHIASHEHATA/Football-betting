@@ -16,5 +16,5 @@ interface MatchesResultsDAO {
     suspend fun getAllMatchesResults(): List<MatchResultLocalModel>
 
     @Query("DELETE FROM matches_results")
-    suspend fun deleteAllMatchesResults()
+    suspend fun deleteAllMatchesResults() : Int
 }
