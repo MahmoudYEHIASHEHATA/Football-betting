@@ -16,7 +16,7 @@ interface LocalDataSource {
 
     suspend fun getAllMatchesResults(): List<MatchResultDTO>
 
-    suspend fun deleteAllMatches()
+    suspend fun deleteAllMatches() : Int
 
-    suspend fun deleteAllMatchesResults()
+    suspend fun deleteAllMatchesResults() : Int
 }
