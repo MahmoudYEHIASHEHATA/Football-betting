@@ -36,15 +36,15 @@ class LocalDataSourceImp @Inject constructor(
     }
 
     override suspend fun getAllMatchesResults(): List<MatchResultDTO> {
-       val matchLocalModel = matchesResultsDAO.getAllMatchesResults()
+        val matchLocalModel = matchesResultsDAO.getAllMatchesResults()
         return matchResultMapper.fromList(matchLocalModel)
     }
 
-    override suspend fun deleteAllMatches() {
-        matchesDAO.getAllMatches()
+    override suspend fun deleteAllMatches(): Int {
+        return matchesDAO.deleteAllMatches()
     }
 
-    override suspend fun deleteAllMatchesResults() {
-        matchesResultsDAO.deleteAllMatchesResults()
+    override suspend fun deleteAllMatchesResults(): Int {
+        return matchesResultsDAO.deleteAllMatchesResults()
     }
 }
