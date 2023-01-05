@@ -1,6 +1,6 @@
 package com.proekspert.remote.model
 
 data class Match(
-    val team1:String,
-    val team2:String
+    val team1:String?= null,
+    val team2:String? = null
 )
