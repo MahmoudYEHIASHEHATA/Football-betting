@@ -12,8 +12,7 @@ import com.proekspert.feature.model.MatchUiModel
 class MatchesForPredictionContract {
 
     sealed class Event : UiEvent {
-        object OnFetchAllMatchesForPredictions : Event()
-        object GetAllMatchesResults : Event()
+        object OnFetchAllMatchesForPrediction : Event()
         data class OnMatchItemClicked(val match: MatchUiModel) : Event()
     }
 
@@ -25,7 +24,7 @@ class MatchesForPredictionContract {
     sealed class MatchState {
         object Idle : MatchState()
         object Loading : MatchState()
-        data class Success(val authorList: List<MatchUiModel>) : MatchState()
+        data class Success(val matchesList: List<MatchUiModel>) : MatchState()
     }
 
     sealed class Effect : UiEffect {
