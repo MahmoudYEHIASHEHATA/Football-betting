@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/core_nav_graph"
+    app:startDestination="@id/matchesResultsFragment">
+
+    <fragment
+        android:id="@+id/matchesForPredictionFragment"
+        android:name="com.proekspert.feature.ui.matches.MatchesForPredictionFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_matches_for_prediction">
+        <action
+            android:id="@+id/action_matchesForPredictionFragment_to_matchesResultsFragment"
+            app:destination="@id/matchesResultsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/matchesResultsFragment"
+        android:name="com.proekspert.feature.ui.results.MatchesResultsFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_matches_results" />
+</navigation>

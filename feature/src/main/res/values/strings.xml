@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="get_results">Get results</string>
+    <string name="restart">Restart</string>
+    <string name="try_again">Try again</string>
+    <string name="cancel">Cancel</string>
+</resources>

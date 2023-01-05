@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="match"
+            type="com.proekspert.feature.model.MatchUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_tiny">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/crd_match"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_generic">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/team1_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLength="10"
+                    android:padding="@dimen/spacing_generic"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_18"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/betting_score_for_team1_tv"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@{match.team1 , default=`Not exist`}" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/betting_score_for_team1_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_generic"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:padding="@dimen/spacing_generic"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/separator_view"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/team1_name_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="-" />
+
+                <View
+                    android:id="@+id/separator_view"
+                    android:layout_width="@dimen/dimen_10"
+                    android:layout_height="@dimen/dimen_3"
+                    android:background="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/betting_score_for_team2_tv"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/betting_score_for_team1_tv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/betting_score_for_team2_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:padding="@dimen/spacing_generic"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/team2_name_tv"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/separator_view"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/team2_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLength="10"
+                    android:padding="@dimen/spacing_generic"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/betting_score_for_team2_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@{match.team2 , default=`Not exist`}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
