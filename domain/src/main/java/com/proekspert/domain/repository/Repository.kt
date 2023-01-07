@@ -1,15 +1,20 @@
 package com.proekspert.domain.repository
 
-import com.proekspert.common.Resource
-import com.proekspert.domain.entity.MatchEntity
-import com.proekspert.domain.entity.MatchResultEntity
+import com.proekspert.domain.model.Match
+import com.proekspert.domain.model.MatchResult
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Methods of Repository
  */
 interface Repository {
-    suspend fun getMatches(): Flow<Resource<List<MatchEntity>>>
+    suspend fun getMatches(): Flow<List<Match>>
 
-    suspend fun getMatchesResults(): Flow<Resource<List<MatchResultEntity>>>
+    suspend fun editMatch(match: Match)
+
+    suspend fun deleteAllMatches() : Int
+
+    suspend fun deleteAllMatchesResults() : Int
+
+    suspend fun getMatchesResults(): Flow<List<MatchResult>>
 }

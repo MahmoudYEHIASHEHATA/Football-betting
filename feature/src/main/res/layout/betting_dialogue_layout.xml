@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="match"
+            type="com.proekspert.feature.model.MatchUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,13 +25,14 @@
             android:textColor="@color/black"
             android:textSize="@dimen/font_18"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintBottom_toBottomOf="@+id/team1_scoring_la"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Real Madrid Madrid MadridMadrid" />
+            app:layout_constraintTop_toTopOf="@id/team1_scoring_la"
+            tools:text="@{match.team1 , default=`Not exist`}" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/team1_scoring_la"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_generic"
@@ -61,7 +65,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_18"
                 android:textStyle="bold"
-                tools:text="0" />
+                tools:text="@{Integer.toString(match.bettingScoreTeam1) , default=0}" />
 
             <TextView
                 android:id="@+id/increase_team1_btn"
@@ -94,18 +98,18 @@
             android:textColor="@color/black"
             android:textSize="@dimen/font_18"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/team2_scoring_la"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"
-            tools:text="City" />
+            app:layout_constraintTop_toTopOf="@+id/team2_scoring_la"
+            tools:text="@{match.team2 , default=`Not exist`}" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/team2_scoring_la"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_generic"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline">
 
@@ -133,7 +137,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_18"
                 android:textStyle="bold"
-                tools:text="0" />
+                tools:text="@{Integer.toString(match.bettingScoreTeam2) , default=0}" />
 
             <TextView
                 android:id="@+id/increase_team2_btn"
@@ -147,5 +151,17 @@
                 android:textSize="@dimen/font_32"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:gravity="center"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/team2_scoring_la" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

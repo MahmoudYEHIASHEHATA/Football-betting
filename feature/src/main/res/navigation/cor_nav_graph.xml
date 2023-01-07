@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/core_nav_graph"
-    app:startDestination="@id/matchesResultsFragment">
+    app:startDestination="@id/matchesForPredictionFragment">
 
     <fragment
         android:id="@+id/matchesForPredictionFragment"
         android:name="com.proekspert.feature.ui.matches.MatchesForPredictionFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_matches_for_prediction">
+
         <action
             android:id="@+id/action_matchesForPredictionFragment_to_matchesResultsFragment"
             app:destination="@id/matchesResultsFragment" />
+
     </fragment>
 
 
@@ -21,4 +23,16 @@
         android:name="com.proekspert.feature.ui.results.MatchesResultsFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_matches_results" />
+
+    <dialog
+        android:id="@+id/bettingDialogFragment"
+        android:name="com.proekspert.feature.ui.betting.BettingDialogFragment"
+        android:label="BettingDialogFragment"
+        tools:layout="@layout/betting_dialogue_layout">
+        <argument
+            android:name="match"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.proekspert.feature.model.MatchUiModel" />
+    </dialog>
 </navigation>
