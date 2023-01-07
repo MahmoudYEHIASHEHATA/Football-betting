@@ -1,7 +1,7 @@
-package com.proekspert.domain.qualifiers
+package com.proekspert.qualifiers
 
 import javax.inject.Qualifier
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class MainDispatcher
+annotation class DefaultDispatcher

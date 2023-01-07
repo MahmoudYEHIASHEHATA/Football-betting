@@ -1,4 +1,4 @@
-package com.proekspert.domain.qualifiers
+package com.proekspert.qualifiers
 
 import javax.inject.Qualifier
 
