@@ -1,8 +1,8 @@
 package com.proekspert.betting.di
 
-import com.proekspert.domain.qualifiers.DefaultDispatcher
-import com.proekspert.domain.qualifiers.IoDispatcher
-import com.proekspert.domain.qualifiers.MainDispatcher
+import com.proekspert.qualifiers.DefaultDispatcher
+import com.proekspert.qualifiers.IoDispatcher
+import com.proekspert.qualifiers.MainDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

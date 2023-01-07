@@ -1,6 +1,6 @@
 package com.proekspert.data.model
 
-data class MatchResultDTO(
+data class MatchResultModel(
     val team1: String,
     val team2: String,
     val team1_points: Int,

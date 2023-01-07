@@ -1,15 +1,13 @@
 package com.proekspert.data.mapper
 
 import com.proekspert.common.Mapper
-import com.proekspert.data.model.MatchDTO
-import com.proekspert.data.model.MatchResultDTO
-import com.proekspert.domain.entity.MatchEntity
-import com.proekspert.domain.entity.MatchResultEntity
+import com.proekspert.data.model.MatchResultModel
+import com.proekspert.domain.model.MatchResult
 import javax.inject.Inject
 
-class MatchResultDataDomainMapper @Inject constructor() : Mapper<MatchResultDTO, MatchResultEntity> {
-    override fun from(i: MatchResultDTO?): MatchResultEntity {
-        return MatchResultEntity(
+class MatchResultDataDomainMapper @Inject constructor() : Mapper<MatchResultModel, MatchResult> {
+    override fun from(i: MatchResultModel?): MatchResult {
+        return MatchResult(
             team1 = i?.team1 ?: "_",
             team2 = i?.team2 ?: "_",
             team1_points = i?.team1_points ?: 0,
@@ -17,8 +15,8 @@ class MatchResultDataDomainMapper @Inject constructor() : Mapper<MatchResultDTO,
         )
     }
 
-    override fun to(o: MatchResultEntity?): MatchResultDTO {
-        return MatchResultDTO(
+    override fun to(o: MatchResult?): MatchResultModel {
+        return MatchResultModel(
             team1 = o?.team1 ?: "_",
             team2 = o?.team2 ?: "_",
             team1_points = o?.team1_points ?: 0,

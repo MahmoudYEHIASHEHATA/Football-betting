@@ -1,15 +1,13 @@
 package com.proekspert.remote.mapper
 
 import com.proekspert.common.Mapper
-import com.proekspert.data.model.MatchDTO
-import com.proekspert.data.model.MatchResultDTO
-import com.proekspert.remote.model.Match
-import com.proekspert.remote.model.MatchResult
+import com.proekspert.data.model.MatchResultModel
+import com.proekspert.remote.model.MatchResultDTO
 import javax.inject.Inject
 
-class MatchResultNetworkDataMapper @Inject constructor() : Mapper<MatchResult, MatchResultDTO> {
-    override fun from(i: MatchResult?): MatchResultDTO {
-        return MatchResultDTO(
+class MatchResultNetworkDataMapper @Inject constructor() : Mapper<MatchResultDTO, MatchResultModel> {
+    override fun from(i: MatchResultDTO?): MatchResultModel {
+        return MatchResultModel(
             team1 = i?.team1 ?: "_",
             team2 = i?.team2 ?: "_",
             team1_points = i?.team1_points ?: 0,
@@ -17,7 +15,7 @@ class MatchResultNetworkDataMapper @Inject constructor() : Mapper<MatchResult, M
         )
     }
 
-    override fun to(o: MatchResultDTO?): MatchResult {
-        return MatchResult()
+    override fun to(o: MatchResultModel?): MatchResultDTO {
+        return MatchResultDTO()
     }
 }

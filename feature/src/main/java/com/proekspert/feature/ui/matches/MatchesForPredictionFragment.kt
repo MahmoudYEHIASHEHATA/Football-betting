@@ -8,10 +8,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.proekspert.base.BaseFragment
+import com.proekspert.feature.R
 import com.proekspert.feature.contract.MatchesForPredictionContract
 import com.proekspert.feature.core.showErrorDialog
 import com.proekspert.feature.databinding.FragmentMatchesForPredictionBinding
+import com.proekspert.feature.model.MatchUiModel
+import com.proekspert.feature.ui.betting.BettingDialogFragment
+import com.proekspert.feature.ui.betting.BettingDialogFragmentArgs
 import com.proekspert.feature.ui.vm.MatchesForPredictionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,15 +31,26 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
     private val viewModel: MatchesForPredictionViewModel by viewModels()
     private val adapter: MatchForPredictionAdapter by lazy {
         MatchForPredictionAdapter {
+            openBettingDialog(it)
         }
     }
 
+    private fun openBettingDialog(it: MatchUiModel?) {
+       findNavController().navigate(R.id.bettingDialogFragment,BettingDialogFragmentArgs(it).toBundle())
+    }
+
+    private fun openMatchesResultsFragment() {
+        val action =
+            MatchesForPredictionFragmentDirections.actionMatchesForPredictionFragmentToMatchesResultsFragment()
+        findNavController().navigate(action)
+    }
 
     override val bindLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMatchesForPredictionBinding
         get() = FragmentMatchesForPredictionBinding::inflate
 
     override fun prepareView(savedInstanceState: Bundle?) {
         binding.rvMatchesForPrediction.adapter = adapter
+        binding.getResultsBtn.setOnClickListener { openMatchesResultsFragment() }
         viewModel.setEvent(MatchesForPredictionContract.Event.OnFetchAllMatchesForPrediction)
         initObservers()
     }

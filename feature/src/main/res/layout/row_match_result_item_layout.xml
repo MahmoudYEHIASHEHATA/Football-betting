@@ -65,7 +65,7 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@+id/team1_name_tv"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{Integer.toString(matchResult.team1_points) , default=`0`}"/>
+                    tools:text="@{Integer.toString(matchResult.team1_points) , default=`-`}"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/betting_score_for_team1_tv"
@@ -122,7 +122,7 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@+id/separator_view"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{Integer.toString(matchResult.team2_points) , default=`0`}"/>
+                    tools:text="@{Integer.toString(matchResult.team2_points) , default=`-`}"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/betting_score_for_team2_tv"

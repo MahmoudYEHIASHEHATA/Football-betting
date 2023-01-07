@@ -3,12 +3,12 @@ package com.proekspert.feature.ui.vm
 import androidx.lifecycle.viewModelScope
 import com.proekspert.base.BaseViewModel
 import com.proekspert.common.Mapper
-import com.proekspert.common.Resource
-import com.proekspert.domain.entity.MatchEntity
+import com.proekspert.domain.model.Match
 import com.proekspert.domain.usecase.GetMatchesUseCase
 import com.proekspert.feature.contract.MatchesForPredictionContract
 import com.proekspert.feature.model.MatchUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchesForPredictionViewModel @Inject constructor(
     private val getMatchesUseCase: GetMatchesUseCase,
-    private val matchMapper: Mapper<MatchEntity, MatchUiModel>
+    private val matchMapper: Mapper<Match, MatchUiModel>
 ) : BaseViewModel<MatchesForPredictionContract.Event, MatchesForPredictionContract.State, MatchesForPredictionContract.Effect>() {
 
     override fun createInitialState(): MatchesForPredictionContract.State {
@@ -44,32 +44,17 @@ class MatchesForPredictionViewModel @Inject constructor(
     private fun getAllMatches() {
         viewModelScope.launch {
             getMatchesUseCase.execute(null)
-                .onStart { emit(Resource.Loading) }
+                .onStart { setState { copy(matchState = MatchesForPredictionContract.MatchState.Loading) } }
+                .catch { setEffect { MatchesForPredictionContract.Effect.ShowError(message = it.message) } }
                 .collect {
-                    when (it) {
-                        is Resource.Loading -> {
-                            // Set State
-                            setState { copy(matchState = MatchesForPredictionContract.MatchState.Loading) }
-                        }
-                        is Resource.Empty -> {
-                            // Set State
-                            setState { copy(matchState = MatchesForPredictionContract.MatchState.Idle) }
-                        }
-                        is Resource.Success -> {
-                            // Set State
-                            val matchesList = matchMapper.fromList(it.data)
-                            setState {
-                                copy(
-                                    matchState = MatchesForPredictionContract.MatchState.Success(
-                                        matchesList = matchesList
-                                    )
-                                )
-                            }
-                        }
-                        is Resource.Error -> {
-                            // Set Effect
-                            setEffect { MatchesForPredictionContract.Effect.ShowError(message = it.exception.message) }
-                        }
+                    // Set State
+                    val matchesList = matchMapper.fromList(it)
+                    setState {
+                        copy(
+                            matchState = MatchesForPredictionContract.MatchState.Success(
+                                matchesList = matchesList
+                            )
+                        )
                     }
                 }
         }

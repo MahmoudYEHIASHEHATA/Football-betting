@@ -1,6 +1,6 @@
-package com.proekspert.domain.entity
+package com.proekspert.domain.model
 
-data class MatchResultEntity(
+data class MatchResult(
     val team1: String,
     val team2: String,
     val team1_points: Int,
