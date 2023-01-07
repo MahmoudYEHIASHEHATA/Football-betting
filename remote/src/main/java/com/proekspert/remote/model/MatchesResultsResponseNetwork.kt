@@ -1,5 +1,5 @@
 package com.proekspert.remote.model
 
 data class MatchesResultsResponseNetwork(
-    val matches : List<MatchResult>
+    val matches : List<MatchResultDTO>
 )

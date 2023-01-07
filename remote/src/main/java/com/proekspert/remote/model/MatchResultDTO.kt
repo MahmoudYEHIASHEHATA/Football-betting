@@ -1,6 +1,6 @@
 package com.proekspert.remote.model
 
-data class MatchResult(
+data class MatchResultDTO(
     val team1: String? = null,
     val team2: String? = null,
     val team1_points: Int? = null,
