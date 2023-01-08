@@ -4,7 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.proekspert.base.BaseViewModel
 import com.proekspert.common.Mapper
 import com.proekspert.domain.model.MatchResult
+import com.proekspert.domain.model.MatchResultsWithPrediction
 import com.proekspert.domain.usecase.GetMatchesResultsUseCase
+import com.proekspert.domain.usecase.GetMatchesResultsWithPredictionUseCase
 import com.proekspert.feature.contract.MatchesResultsContract
 import com.proekspert.feature.model.MatchResultUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchesResultsViewModel @Inject constructor(
-    private val getMatchesResultsUseCase: GetMatchesResultsUseCase,
-    private val matchMapper: Mapper<MatchResult, MatchResultUiModel>
+    private val getMatchesResultsWithPredictionUseCase: GetMatchesResultsWithPredictionUseCase,
+    private val matchMapper: Mapper<MatchResultsWithPrediction, MatchResultUiModel>
 ) : BaseViewModel<MatchesResultsContract.Event, MatchesResultsContract.State, MatchesResultsContract.Effect>() {
 
     override fun createInitialState(): MatchesResultsContract.State {
@@ -38,7 +40,7 @@ class MatchesResultsViewModel @Inject constructor(
      */
     private fun getAllMatchesResults() {
         viewModelScope.launch {
-            getMatchesResultsUseCase.execute(null)
+            getMatchesResultsWithPredictionUseCase.execute(null)
                 .onStart { setState { copy(matchResultState = MatchesResultsContract.MatchResultState.Loading) } }
                 .catch { setEffect { MatchesResultsContract.Effect.ShowError(message = it.message) } }
                 .collect {
