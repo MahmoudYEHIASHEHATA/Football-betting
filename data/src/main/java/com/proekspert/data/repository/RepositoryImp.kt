@@ -60,6 +60,10 @@ class RepositoryImp @Inject constructor(
         return localDataSource.existsPredictions()
     }
 
+    override suspend fun isMatchesTableEmpty(): Boolean {
+        return localDataSource.isMatchesTableEmpty()
+    }
+
 
     private suspend fun refreshMatchesResultsCache() {
         // Get data from RemoteDataSource

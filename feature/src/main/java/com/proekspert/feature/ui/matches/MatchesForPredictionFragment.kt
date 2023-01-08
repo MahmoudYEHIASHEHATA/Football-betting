@@ -52,6 +52,7 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
         get() = FragmentMatchesForPredictionBinding::inflate
 
     override fun prepareView(savedInstanceState: Bundle?) {
+        viewModel.setEvent(MatchesForPredictionContract.Event.OnFetchAllMatchesForPrediction)
         binding.rvMatchesForPrediction.adapter = adapter
         binding.getResultsBtn.setOnClickListener { viewModel.setEvent(MatchesForPredictionContract.Event.ShowAllResults) }
         initObservers()

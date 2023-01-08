@@ -22,4 +22,5 @@ interface Repository {
 
     suspend fun existsPredictions(): Boolean
 
+    suspend fun isMatchesTableEmpty(): Boolean
 }
