@@ -18,7 +18,8 @@ class GetMatchesResultsWithPredictionUseCase @Inject constructor(
     private suspend fun getMatchesResultsWithPrediction(): Flow<List<MatchResultsWithPrediction>> {
         var mapPredictions: HashMap<Pair<String, String>, Pair<Int?, Int?>> = HashMap()
         val matchesPredictions = repository.getCachedMatches()
-        val matchesResults = repository.getMatchesResults()
+        val matchesResults =
+            if (repository.isMatchesResultsTableEmpty()) repository.getFreshMatchesResults() else repository.getCachedMatchesResults()
 
         return matchesResults.combine(matchesPredictions) { results, predictions ->
             for (prediction in predictions) {

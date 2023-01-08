@@ -28,6 +28,10 @@ class RepositoryImp @Inject constructor(
         return localDataSource.getAllMatches().map { matchMapper.fromList(it) }
     }
 
+    override suspend fun getCachedMatchesResults(): Flow<List<MatchResult>> {
+        return localDataSource.getAllMatchesResults().map { matchResultMapper.fromList(it) }
+    }
+
     override suspend fun editMatch(match: Match) {
         localDataSource.editMatch(matchMapper.to(match))
     }
@@ -49,7 +53,7 @@ class RepositoryImp @Inject constructor(
         localDataSource.addAllMatches(data)
     }
 
-    override suspend fun getMatchesResults(): Flow<List<MatchResult>> {
+    override suspend fun getFreshMatchesResults(): Flow<List<MatchResult>> {
         return localDataSource.getAllMatchesResults()
             .onStart {
                 refreshMatchesResultsCache()
@@ -62,6 +66,10 @@ class RepositoryImp @Inject constructor(
 
     override suspend fun isMatchesTableEmpty(): Boolean {
         return localDataSource.isMatchesTableEmpty()
+    }
+
+    override suspend fun isMatchesResultsTableEmpty(): Boolean {
+        return localDataSource.isMatchesResultsTableEmpty()
     }
 
 

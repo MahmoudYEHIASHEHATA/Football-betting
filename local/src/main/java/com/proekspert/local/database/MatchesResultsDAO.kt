@@ -18,4 +18,7 @@ interface MatchesResultsDAO {
 
     @Query("DELETE FROM matches_results")
     suspend fun deleteAllMatchesResults() : Int
+
+    @Query("SELECT (SELECT COUNT(*) FROM matches_results) == 0")
+    fun isEmpty(): Boolean
 }

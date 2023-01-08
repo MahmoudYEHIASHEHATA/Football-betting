@@ -3,9 +3,7 @@ package com.proekspert.feature.ui.vm
 import androidx.lifecycle.viewModelScope
 import com.proekspert.base.BaseViewModel
 import com.proekspert.common.Mapper
-import com.proekspert.domain.model.MatchResult
 import com.proekspert.domain.model.MatchResultsWithPrediction
-import com.proekspert.domain.usecase.GetMatchesResultsUseCase
 import com.proekspert.domain.usecase.GetMatchesResultsWithPredictionUseCase
 import com.proekspert.feature.contract.MatchesResultsContract
 import com.proekspert.feature.model.MatchResultUiModel

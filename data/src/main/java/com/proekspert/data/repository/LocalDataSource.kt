@@ -27,4 +27,5 @@ interface LocalDataSource {
 
     suspend fun isMatchesTableEmpty(): Boolean
 
+    suspend fun isMatchesResultsTableEmpty(): Boolean
 }
