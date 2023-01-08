@@ -9,13 +9,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.proekspert.base.BaseFragment
 import com.proekspert.feature.R
 import com.proekspert.feature.contract.MatchesForPredictionContract
 import com.proekspert.feature.core.showErrorDialog
 import com.proekspert.feature.databinding.FragmentMatchesForPredictionBinding
 import com.proekspert.feature.model.MatchUiModel
-import com.proekspert.feature.ui.betting.BettingDialogFragment
 import com.proekspert.feature.ui.betting.BettingDialogFragmentArgs
 import com.proekspert.feature.ui.vm.MatchesForPredictionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +36,10 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
     }
 
     private fun openBettingDialog(it: MatchUiModel?) {
-       findNavController().navigate(R.id.bettingDialogFragment,BettingDialogFragmentArgs(it).toBundle())
+        findNavController().navigate(
+            R.id.bettingDialogFragment,
+            BettingDialogFragmentArgs(it).toBundle()
+        )
     }
 
     private fun openMatchesResultsFragment() {
@@ -49,9 +52,9 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
         get() = FragmentMatchesForPredictionBinding::inflate
 
     override fun prepareView(savedInstanceState: Bundle?) {
-        binding.rvMatchesForPrediction.adapter = adapter
-        binding.getResultsBtn.setOnClickListener { openMatchesResultsFragment() }
         viewModel.setEvent(MatchesForPredictionContract.Event.OnFetchAllMatchesForPrediction)
+        binding.rvMatchesForPrediction.adapter = adapter
+        binding.getResultsBtn.setOnClickListener { viewModel.setEvent(MatchesForPredictionContract.Event.ShowAllResults) }
         initObservers()
     }
 
@@ -92,6 +95,16 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
                                     )
                                 }
                             }
+                        }
+                        is MatchesForPredictionContract.Effect.NavigateToPrediction -> {
+                            openMatchesResultsFragment()
+                        }
+                        is MatchesForPredictionContract.Effect.NoPrediction -> {
+                            Snackbar.make(
+                                binding.root,
+                                "No prediction exist pleas enter prediction to show the results",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }

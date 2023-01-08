@@ -44,7 +44,7 @@ class BettingViewModel @Inject constructor(
                 updateMatch(match = item)
             }
             is BettingContract.Event.SetMatch -> {
-                val item = event.match
+                val item = event.match?.copy(bettingScoreTeam2 = event.match.bettingScoreTeam2 ?: 0 , bettingScoreTeam1 = event.match.bettingScoreTeam1 ?: 0  )
                 setState { copy(matchState = item) }
             }
         }

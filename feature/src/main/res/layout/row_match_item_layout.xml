@@ -65,7 +65,7 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@+id/team1_name_tv"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{Integer.toString(match.bettingScoreTeam1) , default=`-`}" />
+                    tools:text="@{match.bettingScoreTeam1 !=null ? Integer.toString(match.bettingScoreTeam1) : `-` , default=`-`}" />
 
                 <View
                     android:id="@+id/separator_view"
@@ -93,7 +93,7 @@
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@+id/separator_view"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{Integer.toString(match.bettingScoreTeam2) , default=`-`}" />
+                    tools:text="@{match.bettingScoreTeam2 !=null ? Integer.toString(match.bettingScoreTeam2) : `-` , default=`-`}" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/team2_name_tv"

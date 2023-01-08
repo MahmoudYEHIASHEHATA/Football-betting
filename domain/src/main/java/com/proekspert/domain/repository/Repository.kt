@@ -19,4 +19,8 @@ interface Repository {
     suspend fun deleteAllMatchesResults(): Int
 
     suspend fun getMatchesResults(): Flow<List<MatchResult>>
+
+    suspend fun existsPredictions(): Boolean
+
+    suspend fun isMatchesTableEmpty(): Boolean
 }

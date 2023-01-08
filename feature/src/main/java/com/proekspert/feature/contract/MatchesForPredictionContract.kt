@@ -13,12 +13,13 @@ class MatchesForPredictionContract {
 
     sealed class Event : UiEvent {
         object OnFetchAllMatchesForPrediction : Event()
+        object ShowAllResults : Event()
         data class OnMatchItemClicked(val match: MatchUiModel) : Event()
     }
 
     data class State(
         val matchState: MatchState,
-        val selectedMatch: MatchUiModel? = null
+        val selectedMatch: MatchUiModel? = null,
     ) : UiState
 
     sealed class MatchState {
@@ -29,5 +30,7 @@ class MatchesForPredictionContract {
 
     sealed class Effect : UiEffect {
         data class ShowError(val message: String?) : Effect()
+        object NoPrediction : Effect()
+        object NavigateToPrediction : Effect()
     }
 }

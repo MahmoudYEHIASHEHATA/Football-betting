@@ -34,7 +34,7 @@ class LocalDataSourceImp @Inject constructor(
     }
 
     override suspend fun editMatch(match: MatchModel) {
-        withContext(dispatcher){
+        withContext(dispatcher) {
             matchesDAO.updateMatch(matchMapper.to(match))
         }
     }
@@ -67,8 +67,20 @@ class LocalDataSourceImp @Inject constructor(
     }
 
     override suspend fun deleteAllMatchesResults(): Int {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             matchesResultsDAO.deleteAllMatchesResults()
+        }
+    }
+
+    override suspend fun existsPredictions(): Boolean {
+        return withContext(dispatcher) {
+            matchesDAO.existsPredictions()
+        }
+    }
+
+    override suspend fun isMatchesTableEmpty(): Boolean {
+        return withContext(dispatcher) {
+            matchesDAO.isEmpty()
         }
     }
 }

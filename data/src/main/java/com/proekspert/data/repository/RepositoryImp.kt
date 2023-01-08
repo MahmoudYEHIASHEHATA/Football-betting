@@ -56,6 +56,14 @@ class RepositoryImp @Inject constructor(
             }.map { matchResultMapper.fromList(it) }
     }
 
+    override suspend fun existsPredictions(): Boolean {
+        return localDataSource.existsPredictions()
+    }
+
+    override suspend fun isMatchesTableEmpty(): Boolean {
+        return localDataSource.isMatchesTableEmpty()
+    }
+
 
     private suspend fun refreshMatchesResultsCache() {
         // Get data from RemoteDataSource

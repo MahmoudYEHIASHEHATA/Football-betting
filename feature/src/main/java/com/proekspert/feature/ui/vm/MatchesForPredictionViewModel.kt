@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.proekspert.base.BaseViewModel
 import com.proekspert.common.Mapper
 import com.proekspert.domain.model.Match
+import com.proekspert.domain.usecase.CheckExistsPredictionsInLocalUseCase
 import com.proekspert.domain.usecase.GetMatchesUseCase
 import com.proekspert.feature.contract.MatchesForPredictionContract
 import com.proekspert.feature.model.MatchUiModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchesForPredictionViewModel @Inject constructor(
+    private val checkExistsRecordInMatchesLocalUseCase: CheckExistsPredictionsInLocalUseCase,
     private val getMatchesUseCase: GetMatchesUseCase,
     private val matchMapper: Mapper<Match, MatchUiModel>
 ) : BaseViewModel<MatchesForPredictionContract.Event, MatchesForPredictionContract.State, MatchesForPredictionContract.Effect>() {
@@ -34,6 +36,19 @@ class MatchesForPredictionViewModel @Inject constructor(
             is MatchesForPredictionContract.Event.OnMatchItemClicked -> {
                 val item = event.match
                 setSelectedMatch(match = item)
+            }
+            is MatchesForPredictionContract.Event.ShowAllResults -> {
+                chekExistPredictions()
+            }
+        }
+    }
+
+    private fun chekExistPredictions() {
+        viewModelScope.launch {
+            if (checkExistsRecordInMatchesLocalUseCase.buildRequest()) {
+                setEffect { MatchesForPredictionContract.Effect.NavigateToPrediction }
+            } else {
+                setEffect { MatchesForPredictionContract.Effect.NoPrediction }
             }
         }
     }
