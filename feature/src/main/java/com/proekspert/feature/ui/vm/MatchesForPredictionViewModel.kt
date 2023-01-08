@@ -19,6 +19,10 @@ class MatchesForPredictionViewModel @Inject constructor(
     private val matchMapper: Mapper<Match, MatchUiModel>
 ) : BaseViewModel<MatchesForPredictionContract.Event, MatchesForPredictionContract.State, MatchesForPredictionContract.Effect>() {
 
+    init {
+        setEvent(MatchesForPredictionContract.Event.OnFetchAllMatchesForPrediction)
+    }
+
     override fun createInitialState(): MatchesForPredictionContract.State {
         return MatchesForPredictionContract.State(
             matchState = MatchesForPredictionContract.MatchState.Idle,

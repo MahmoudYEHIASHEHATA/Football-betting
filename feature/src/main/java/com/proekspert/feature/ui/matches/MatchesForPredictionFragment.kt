@@ -15,7 +15,6 @@ import com.proekspert.feature.contract.MatchesForPredictionContract
 import com.proekspert.feature.core.showErrorDialog
 import com.proekspert.feature.databinding.FragmentMatchesForPredictionBinding
 import com.proekspert.feature.model.MatchUiModel
-import com.proekspert.feature.ui.betting.BettingDialogFragment
 import com.proekspert.feature.ui.betting.BettingDialogFragmentArgs
 import com.proekspert.feature.ui.vm.MatchesForPredictionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +35,10 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
     }
 
     private fun openBettingDialog(it: MatchUiModel?) {
-       findNavController().navigate(R.id.bettingDialogFragment,BettingDialogFragmentArgs(it).toBundle())
+        findNavController().navigate(
+            R.id.bettingDialogFragment,
+            BettingDialogFragmentArgs(it).toBundle()
+        )
     }
 
     private fun openMatchesResultsFragment() {
@@ -51,7 +53,6 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
     override fun prepareView(savedInstanceState: Bundle?) {
         binding.rvMatchesForPrediction.adapter = adapter
         binding.getResultsBtn.setOnClickListener { openMatchesResultsFragment() }
-        viewModel.setEvent(MatchesForPredictionContract.Event.OnFetchAllMatchesForPrediction)
         initObservers()
     }
 
