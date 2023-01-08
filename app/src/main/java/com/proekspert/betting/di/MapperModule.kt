@@ -7,6 +7,7 @@ import com.proekspert.data.model.MatchModel
 import com.proekspert.data.model.MatchResultModel
 import com.proekspert.domain.model.Match
 import com.proekspert.domain.model.MatchResult
+import com.proekspert.domain.model.MatchResultsWithPrediction
 import com.proekspert.feature.mapper.MatchDomainUiMapper
 import com.proekspert.feature.mapper.MatchResultDomainUiMapper
 import com.proekspert.feature.model.MatchResultUiModel
@@ -53,7 +54,7 @@ abstract class MapperModule {
     abstract fun bindsMatchDomainUiMapper(mapper : MatchDomainUiMapper) : Mapper<Match, MatchUiModel>
 
     @Binds
-    abstract fun bindsMatchResultDomainUiMapper(mapper : MatchResultDomainUiMapper) : Mapper<MatchResult, MatchResultUiModel>
+    abstract fun bindsMatchResultDomainUiMapper(mapper : MatchResultDomainUiMapper) : Mapper<MatchResultsWithPrediction, MatchResultUiModel>
     //endregion
 
 

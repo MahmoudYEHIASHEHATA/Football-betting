@@ -11,6 +11,6 @@ class GetMatchesUseCase @Inject constructor(
 ) : BaseUseCase<List<Match>, Nothing>() {
 
     override suspend fun buildRequest(params: Nothing?): Flow<List<Match>> {
-        return repository.getMatches()
+        return repository.getFreshMatches()
     }
 }

@@ -17,11 +17,15 @@ class RepositoryImp @Inject constructor(
     private val matchMapper: Mapper<MatchModel, Match>,
     private val matchResultMapper: Mapper<MatchResultModel, MatchResult>
 ) : Repository {
-    override suspend fun getMatches(): Flow<List<Match>> {
+    override suspend fun getFreshMatches(): Flow<List<Match>> {
         return localDataSource.getAllMatches()
             .onStart {
                 refreshMatchesCache()
             }.map { matchMapper.fromList(it) }
+    }
+
+    override suspend fun getCachedMatches(): Flow<List<Match>> {
+        return localDataSource.getAllMatches().map { matchMapper.fromList(it) }
     }
 
     override suspend fun editMatch(match: Match) {
