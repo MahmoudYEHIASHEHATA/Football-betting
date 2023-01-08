@@ -83,4 +83,10 @@ class LocalDataSourceImp @Inject constructor(
             matchesDAO.isEmpty()
         }
     }
+
+    override suspend fun isMatchesResultsTableEmpty(): Boolean {
+        return withContext(dispatcher) {
+            matchesResultsDAO.isEmpty()
+        }
+    }
 }

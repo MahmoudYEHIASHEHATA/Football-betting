@@ -11,7 +11,7 @@ class GetMatchesUseCase @Inject constructor(
 ) : BaseUseCase<List<Match>, Nothing>() {
 
     override suspend fun buildRequest(params: Nothing?): Flow<List<Match>> {
-        return if (!repository.isMatchesTableEmpty() && !repository.existsPredictions())
+        return if (repository.isMatchesTableEmpty() || !repository.existsPredictions())
             repository.getFreshMatches()
         else repository.getCachedMatches()
     }
