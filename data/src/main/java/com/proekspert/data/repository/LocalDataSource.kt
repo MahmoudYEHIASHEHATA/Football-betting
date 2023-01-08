@@ -22,4 +22,6 @@ interface LocalDataSource {
     suspend fun deleteAllMatches() : Int
 
     suspend fun deleteAllMatchesResults() : Int
+
+    suspend fun existsPredictions(): Boolean
 }

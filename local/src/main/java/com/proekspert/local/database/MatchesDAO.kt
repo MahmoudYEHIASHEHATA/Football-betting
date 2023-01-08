@@ -18,4 +18,7 @@ interface MatchesDAO {
 
     @Update
     suspend fun updateMatch(match: MatchEntity)
+
+    @Query("SELECT EXISTS (SELECT * FROM matches WHERE bettingScoreTeam1 >= 0 OR bettingScoreTeam2 >=0)")
+    suspend fun existsPredictions(): Boolean
 }

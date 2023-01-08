@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.proekspert.base.BaseFragment
 import com.proekspert.feature.R
 import com.proekspert.feature.contract.MatchesForPredictionContract
@@ -52,7 +53,7 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
 
     override fun prepareView(savedInstanceState: Bundle?) {
         binding.rvMatchesForPrediction.adapter = adapter
-        binding.getResultsBtn.setOnClickListener { openMatchesResultsFragment() }
+        binding.getResultsBtn.setOnClickListener { viewModel.setEvent(MatchesForPredictionContract.Event.ShowAllResults) }
         initObservers()
     }
 
@@ -93,6 +94,16 @@ class MatchesForPredictionFragment : BaseFragment<FragmentMatchesForPredictionBi
                                     )
                                 }
                             }
+                        }
+                        is MatchesForPredictionContract.Effect.NavigateToPrediction -> {
+                            openMatchesResultsFragment()
+                        }
+                        is MatchesForPredictionContract.Effect.NoPrediction -> {
+                            Snackbar.make(
+                                binding.root,
+                                "No prediction exist pleas enter prediction to show the results",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }

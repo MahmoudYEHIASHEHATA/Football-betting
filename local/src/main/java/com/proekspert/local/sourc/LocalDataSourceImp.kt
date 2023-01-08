@@ -71,4 +71,10 @@ class LocalDataSourceImp @Inject constructor(
             matchesResultsDAO.deleteAllMatchesResults()
         }
     }
+
+    override suspend fun existsPredictions(): Boolean {
+        return  withContext(dispatcher){
+            matchesDAO.existsPredictions()
+        }
+    }
 }
