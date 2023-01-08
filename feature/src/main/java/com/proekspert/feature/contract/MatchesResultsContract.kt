@@ -12,6 +12,7 @@ class MatchesResultsContract {
 
     sealed class Event : UiEvent {
         object OnFetchAllMatchesResults : Event()
+        object Restart :Event()
     }
 
     data class State(
@@ -26,5 +27,6 @@ class MatchesResultsContract {
 
     sealed class Effect : UiEffect {
         data class ShowError(val message: String?) : Effect()
+        object PopUpResultFragment : Effect()
     }
 }
