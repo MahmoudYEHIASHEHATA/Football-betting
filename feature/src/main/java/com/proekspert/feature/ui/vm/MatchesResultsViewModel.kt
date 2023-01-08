@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.proekspert.base.BaseViewModel
 import com.proekspert.common.Mapper
 import com.proekspert.domain.model.MatchResultsWithPrediction
+import com.proekspert.domain.usecase.DeleteMatchesResultsUseCase
+import com.proekspert.domain.usecase.DeleteMatchesUseCase
 import com.proekspert.domain.usecase.GetMatchesResultsWithPredictionUseCase
 import com.proekspert.feature.contract.MatchesResultsContract
 import com.proekspert.feature.model.MatchResultUiModel
@@ -15,6 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchesResultsViewModel @Inject constructor(
+    private val deleteMatchesResultsUseCase: DeleteMatchesResultsUseCase,
+    private val deleteMatchesUseCase: DeleteMatchesUseCase,
     private val getMatchesResultsWithPredictionUseCase: GetMatchesResultsWithPredictionUseCase,
     private val matchMapper: Mapper<MatchResultsWithPrediction, MatchResultUiModel>
 ) : BaseViewModel<MatchesResultsContract.Event, MatchesResultsContract.State, MatchesResultsContract.Effect>() {
@@ -29,6 +33,9 @@ class MatchesResultsViewModel @Inject constructor(
         when (event) {
             is MatchesResultsContract.Event.OnFetchAllMatchesResults -> {
                 getAllMatchesResults()
+            }
+            is MatchesResultsContract.Event.Restart ->{
+                reset()
             }
         }
     }
@@ -52,6 +59,17 @@ class MatchesResultsViewModel @Inject constructor(
                         )
                     }
                 }
+        }
+    }
+
+    /**
+     * Reset cashed predictions and results
+     */
+    private fun reset() {
+        viewModelScope.launch {
+            deleteMatchesResultsUseCase.deleteAllMatchesResults()
+            deleteMatchesUseCase.deleteAllMatches()
+            setEffect { MatchesResultsContract.Effect.PopUpResultFragment }
         }
     }
 }

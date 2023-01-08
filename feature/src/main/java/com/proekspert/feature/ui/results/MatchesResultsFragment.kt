@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.proekspert.base.BaseFragment
 import com.proekspert.feature.contract.MatchesResultsContract
 import com.proekspert.feature.core.showErrorDialog
@@ -34,6 +35,7 @@ class MatchesResultsFragment : BaseFragment<FragmentMatchesResultsBinding>() {
 
     override fun prepareView(savedInstanceState: Bundle?) {
         binding.rvMatchesResults.adapter = adapter
+        binding.restartBtn.setOnClickListener { viewModel.setEvent(MatchesResultsContract.Event.Restart) }
         viewModel.setEvent(MatchesResultsContract.Event.OnFetchAllMatchesResults)
         initObservers()
     }
@@ -75,6 +77,9 @@ class MatchesResultsFragment : BaseFragment<FragmentMatchesResultsBinding>() {
                                     )
                                 }
                             }
+                        }
+                        is MatchesResultsContract.Effect.PopUpResultFragment ->{
+                            findNavController().popBackStack()
                         }
                     }
                 }

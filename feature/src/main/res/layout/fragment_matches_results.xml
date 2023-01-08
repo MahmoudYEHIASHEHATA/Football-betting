@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/get_results_btn"
+            android:id="@+id/restart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_generic"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/get_results_btn"
+            app:layout_constraintTop_toBottomOf="@+id/restart_btn"
             tools:listitem="@layout/row_match_result_item_layout"/>
 
         <ProgressBar
