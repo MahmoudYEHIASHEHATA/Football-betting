@@ -1,4 +1,4 @@
-package com.shahry.local.utils
+package com.proekspert.local.utils
 
 import com.proekspert.local.model.MatchEntity
 import com.proekspert.local.model.MatchResultEntity
