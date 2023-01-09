@@ -7,13 +7,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CacheControl
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 /**
  * Module that holds Network related classes
@@ -27,7 +31,7 @@ object NetworkModule {
      * Provides [HttpLoggingInterceptor] instance
      */
     @Provides
-    fun provideLoggingInterceptor() : HttpLoggingInterceptor {
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG)
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -37,16 +41,35 @@ object NetworkModule {
         return httpLoggingInterceptor
     }
 
+    @Provides
+    fun provideCacheInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val response: Response = chain.proceed(chain.request())
+            val cacheControl = CacheControl.Builder()
+                .maxAge(1, TimeUnit.MINUTES) // 1 minutes cache
+                .build()
+            response.newBuilder()
+                .header("Cache-Control", cacheControl.toString())
+                .build()
+
+        }
+    }
+
     /**
      * Provides [OkHttpClient] instance
      */
     @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor) : OkHttpClient {
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        cacheInterceptor: Interceptor
+    ): OkHttpClient {
+
         return OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
+            .addNetworkInterceptor(cacheInterceptor)
             .retryOnConnectionFailure(true)
             .build()
     }
@@ -55,13 +78,14 @@ object NetworkModule {
      * Provides [Retrofit] instance
      */
     @Provides
-    fun provideRetrofitTest(okHttpClient: OkHttpClient) : Retrofit {
+    fun provideRetrofitTest(okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
             .baseUrl("https://run.mocky.io/v3/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build()
+            .build().also {
+            }
     }
 
     /**
