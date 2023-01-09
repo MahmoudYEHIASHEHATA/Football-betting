@@ -9,7 +9,7 @@ import com.proekspert.local.mapper.MatchesLocalDataMapper
 import com.proekspert.local.mapper.MatchesResultLocalDataMapper
 import com.proekspert.local.sourc.LocalDataSourceImp
 import com.proekspert.local.utils.MainCoroutineRule
-import com.shahry.local.utils.TestData
+import com.proekspert.local.utils.TestData
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
