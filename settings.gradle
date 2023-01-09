@@ -14,3 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Football betting"
 include ':app'
+include ':common'
+include ':domain'
+include ':data'
+include ':local'
+include ':remote'
+include ':base'
+include ':feature'
